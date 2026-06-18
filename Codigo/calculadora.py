@@ -65,7 +65,34 @@ def botao_clicado(value):
     digitos = "0123456789"
     
     if value in right_symbols:
-        pass
+        if value == "=":
+           if A is not None and operador is not None:
+               B = label["text"]
+               numA = float(A)
+               numB = float(B)
+               
+               if operador == "+":
+                   label["text"] = remove_zero_decimal(numA + numB)
+                   
+               elif operador == "-":
+                   label["text"] = remove_zero_decimal(numA - numB)
+                
+               elif operador == "×":
+                   label["text"] = remove_zero_decimal(numA * numB)
+                   
+               elif operador == "÷":
+                   label["text"] = remove_zero_decimal(numA / numB)
+                   
+               clear_all()       
+        
+        elif value in "+-×÷":
+           if operador is None:
+               A = label["text"]
+               label["text"] = "0"
+               B = 0
+           operador = value
+    
+    
     elif value in top_symbols:
         if value == "AC":
             clear_all()
