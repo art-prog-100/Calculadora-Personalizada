@@ -28,11 +28,9 @@ janela.resizable(False, False)
 frame = tkinter.Frame(janela)
 
 label = tkinter.Label(frame, text="0", font=("Arial", 45), background=cor_preta,
-                      foreground=cor_branca, anchor="e")
+                      foreground=cor_branca, anchor="e", width = contador_coluna)
 label.grid(row=0, column=0, columnspan=contador_coluna, sticky="we")
 
-def botao_clicado(value):
-    pass
 
 for linha in range(contador_linha):
     for coluna in range(contador_coluna):
@@ -50,6 +48,59 @@ for linha in range(contador_linha):
         botao.grid(row=linha + 1, column=coluna)
 
 frame.pack()
+
+def clear_all():
+    global A, B, operador
+    A = "0"
+    operador = None
+    B = None
+    
+def remove_zero_decimal(num):
+    if num % 1 == 0:
+        num = int(num)
+    return str(num)
+
+def botao_clicado(value):
+    global right_symbols, top_symbols, label, A, B, operador
+    digitos = "0123456789"
+    
+    if value in right_symbols:
+        pass
+    elif value in top_symbols:
+        if value == "AC":
+            clear_all()
+            label["text"] = "0"
+            
+        elif value == "+/-":
+            if "." in label["text"]:
+             resultado = float(label["text"])*-1
+             label["text"] = str(resultado)
+            else:
+             resultado = int(label["text"])*-1
+             label["text"] = str(resultado)
+             
+        elif value == "%":
+            resultado = float(label["text"])/100
+            label["text"] = remove_zero_decimal(resultado)
+    
+    else:
+        if value == ".":
+            if value not in label["text"]:
+                label["text"] += value
+            
+        elif value in digitos:
+            if label["text"] == "0":
+                label["text"] = value
+            else:
+                label["text"] += value
+
+#A+B, A-B, A*B, A/B
+A = "0"
+operador = None
+B = None
+
+
+
 
 #centralizar a janela
 janela.update()
