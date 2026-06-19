@@ -1,4 +1,5 @@
 import tkinter
+import math
 
 valor_botoes = [
     ["AC", "+/-", "%", "÷"], 
@@ -8,7 +9,7 @@ valor_botoes = [
     ["0", ".", "√", "="]
 ]
 
-right_symbols = ["÷", "×", "-", "+", "="]
+right_symbols = ["÷", "×", "-", "+", "=", "√"]
 top_symbols = ["AC", "+/-", "%"]
 
 contador_linha = len(valor_botoes)
@@ -83,7 +84,19 @@ def botao_clicado(value):
                elif operador == "÷":
                    label["text"] = remove_zero_decimal(numA / numB)
                    
+                   
                clear_all()       
+               
+        if value == "√":
+            if A is not None and B is None:
+               A  = label["text"] 
+               numA = float(A)
+               
+               label["text"] = str(math.sqrt(numA)) 
+        
+        
+        
+        
         
         elif value in "+-×÷":
            if operador is None:
@@ -91,8 +104,14 @@ def botao_clicado(value):
                label["text"] = "0"
                B = 0
            operador = value
+           
+        elif value in "√":
+            if operador is None:
+               A = label["text"]
+               operador = value
     
-    
+               
+           
     elif value in top_symbols:
         if value == "AC":
             clear_all()
@@ -120,6 +139,8 @@ def botao_clicado(value):
                 label["text"] = value
             else:
                 label["text"] += value
+                
+        
 
 #A+B, A-B, A*B, A/B
 A = "0"
