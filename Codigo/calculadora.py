@@ -40,11 +40,11 @@ for linha in range(contador_linha):
                                width=3, height=1,
                                command=lambda valor=valor: botao_clicado(valor))
         if valor in top_symbols:
-            botao.config(foreground=cor_preta, background= cor_cinza)
+            botao.config(foreground=cor_preta, background= cor_cinza_claro)
         elif valor in right_symbols:
             botao.config(foreground=cor_branca, background= cor_laranja)
         else:
-            botao.config(foreground=cor_branca, background= cor_cinza_claro)    
+            botao.config(foreground=cor_branca, background= cor_cinza)    
         
         botao.grid(row=linha + 1, column=coluna)
 
