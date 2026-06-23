@@ -2,15 +2,17 @@ import tkinter
 import math
 
 valor_botoes = [
-    ["AC", "+/-", "%", "÷"], 
+    ["AC", "+/-", "%", "÷"],
     ["7", "8", "9", "×"], 
     ["4", "5", "6", "-"],
     ["1", "2", "3", "+"],
-    ["0", ".", "√", "="]
+    [".", "0", "√", "="]
+
 ]
 
 right_symbols = ["÷", "×", "-", "+", "=", "√"]
 top_symbols = ["AC", "+/-", "%"]
+
 
 contador_linha = len(valor_botoes)
 contador_coluna = len(valor_botoes[0])
