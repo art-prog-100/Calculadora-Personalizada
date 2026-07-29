@@ -52,6 +52,10 @@ for linha in range(contador_linha):
 
 frame.pack()
 
+        
+    
+      
+
 def clear_all():
     global A, B, operador
     A = "0"
@@ -64,39 +68,71 @@ def remove_zero_decimal(num):
     return str(num)
 
 def botao_clicado(value):
+    
     global right_symbols, top_symbols, label, A, B, operador
     digitos = "0123456789"
     
+    
+    
     if value in right_symbols:
         if value == "=":
-           if A is not None and operador is not None:
+           if A is not None and "ERRO" not in A and operador is not None:
                B = label["text"]
                numA = float(A)
                numB = float(B)
                
-               if operador == "+":
-                   label["text"] = remove_zero_decimal(numA + numB)
-                   
+               if operador == "+" :
+                  resultado = remove_zero_decimal(numA + numB)
+                  if len(resultado) > 11:
+                      label["text"] = "ERRO"
+                  else:
+                      label["text"] = resultado
+                      
                elif operador == "-":
-                   label["text"] = remove_zero_decimal(numA - numB)
-                
+                   resultado =  remove_zero_decimal(numA - numB)
+                   if len(resultado) > 11:
+                        label["text"] = "ERRO"
+                   else:
+                        label["text"] = resultado
+                      
                elif operador == "×":
-                   label["text"] = remove_zero_decimal(numA * numB)
-                   
+                   resultado = remove_zero_decimal(numA * numB)
+                   if len(resultado) > 11:
+                        label["text"] = "ERRO"
+                   else:
+                        label["text"] = resultado
+                        
                elif operador == "÷":
-                   label["text"] = remove_zero_decimal(numA / numB)
-                   
+                   resultado = remove_zero_decimal(numA / numB)
+                   if len(resultado) > 11:
+                        label["text"] = "ERRO"
+                   else:
+                        label["text"] = resultado
                    
                clear_all()       
+           if A is not None and "ERRO" in A and operador is not None:
+               B = label["text"]
+               label["text"] = "ERRO:Clique em AC"
+               
+               
+              
                
         if value == "√":
-            if A is not None and B is None:
-               A  = label["text"] 
+            if A is not None and "ERRO" not in A and B is None:
+               A  =  label["text"]
                numA = float(A)
                
-               label["text"] = str(math.sqrt(numA)) 
-        
-        
+               resultado = str(math.sqrt(numA)) 
+             
+               if len(resultado) > 11:
+                 label["text"] = "ERRO"
+               else:
+                 label["text"] = resultado
+            if A is not None and "ERRO" in A and B is None:
+                resultado = "ERRO:Clique em AC"
+                label["text"] = resultado
+                   
+
         
         
         
@@ -119,7 +155,7 @@ def botao_clicado(value):
             clear_all()
             label["text"] = "0"
             
-        elif value == "+/-":
+        elif value == "+/-" and "ERRO" not in label["text"]:
             if "." in label["text"]:
              resultado = float(label["text"])*-1
              label["text"] = str(resultado)
@@ -127,9 +163,23 @@ def botao_clicado(value):
              resultado = int(label["text"])*-1
              label["text"] = str(resultado)
              
-        elif value == "%":
-            resultado = float(label["text"])/100
-            label["text"] = remove_zero_decimal(resultado)
+        elif value == "+/-" and "ERRO" in label["text"]:
+            resultado = "ERRO:Clique em AC"
+            label["text"] = resultado
+            
+            
+        elif value == "%" and "ERRO" not in label["text"]:
+            #resultado = float(label["text"])/100
+            #label["text"] = remove_zero_decimal(resultado)
+            resultado = str(float(label["text"])/100)
+            if len(resultado) > 11:
+                label["text"] = "ERRO"
+            else:
+                label["text"] = remove_zero_decimal(float(resultado))
+                
+        elif value == "%" and "ERRO" in label["text"]:
+            resultado = "ERRO:Clique em AC"
+            label["text"] = resultado
     
     else:
         if value == ".":
